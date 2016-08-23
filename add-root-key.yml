@@ -1,5 +1,5 @@
 ---
-- hosts: local
+- hosts: infra
   tasks:
     
     - name: generate key pair for root on localhost
@@ -14,7 +14,7 @@
 - hosts: all
   tasks:
 
-    - name: kadd root public key to other servers
+    - name: add root public key to other servers
       authorized_key:
         user: root
         key: "{{ lookup('file', 'tmp/id_rsa.pub') }}"

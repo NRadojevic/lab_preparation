@@ -37,13 +37,13 @@
     state: started
   when: docker_pkg_name == 'docker.io'
 
-- name: Add users to the docker group
-  user:
-    name: "{{ item }}"
-    groups: docker
-    append: yes
-    with_items: "{{docker_group_members}}"
-  when: docker_group_members is defined
+#- name: Add users to the docker group
+#  user:
+#    name: "{{ item }}"
+#    groups: docker
+#   append: yes
+#    with_items: "{{docker_group_members}}"
+#  when: docker_group_members is defined
 
 - name: update facts if docker0 is not defined
   action: setup filter="ansible_docker0"
