@@ -1,0 +1,8 @@
+---
+- name: Checking if SSH is listenting.
+  wait_for:
+    host: "{{ hostvars[inventory_hostname]['ansible_eth1']['ipv4']['address'] }}"
+    port: "22"
+    connect_timeout: 2
+    state: started
+  when: inventory_hostname in groups['all']

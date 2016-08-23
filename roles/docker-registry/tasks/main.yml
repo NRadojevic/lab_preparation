@@ -1,0 +1,4 @@
+- name: Create registry on deploy host
+  delegate_to: "{{item}}"
+  with_items: "{{groups['infra']}}"
+  command: docker run -d -p 4000:5000 --restart=always --name registry registry:2

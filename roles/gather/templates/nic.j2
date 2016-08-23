@@ -1,0 +1,11 @@
+NODE;INTERFACE;MTU;MAC;IPV4
+{% for host in groups['all'] %}
+{% for nic in hostvars[host]['ansible_interfaces'] %}
+{% if 'ansible_' + nic in hostvars[host] and not nic == 'lo' and not nic == 'docker0' %}
+{{ host }};{{ nic }}{% if 'mtu' in hostvars[host]['ansible_' + nic] %};{{ hostvars[host]['ansible_' + nic]['mtu'] }}{% endif %}
+{% if 'macaddress' in hostvars[host]['ansible_' + nic] %};{{ hostvars[host]['ansible_' + nic]['macaddress'] }}{% endif %}
+{% if 'ipv4' in hostvars[host]['ansible_' + nic] %};{{ hostvars[host]['ansible_' + nic]['ipv4']['address'] }};{{ hostvars[host]['ansible_' + nic]['ipv4']['netmask'] }}{% else %};;{% endif %}
+
+{% endif %}
+{% endfor %}
+{% endfor %}

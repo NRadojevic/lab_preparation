@@ -1,0 +1,13 @@
+---
+- name: Add Admin Accounts
+  user: name="{{ item.key }}" state="{{ item.value.state }}" groups="{{ item.value.groups }}" shell="/bin/bash" password="{{ item.value.password }}"
+  with_dict: "{{ admin_accounts }}" 
+  tags: 
+    - accounts
+
+- name: Deploy SSH Keys
+  authorized_key: user="{{ item.key }}" key="{{ item.value.key }}" exclusive="{{ item.value.exclusive }}" key_options="{{ item.value.key_options }}" state="present"
+  with_dict: "{{ ssh_keys }}"
+  tags: 
+    - accounts
+    - sshkeys

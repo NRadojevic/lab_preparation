@@ -1,0 +1,16 @@
+---
+- name: generate key pair for root on localhost
+  user: name=root generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
+  when: inventory_hostname in groups['infra']
+
+- name: fetch puiblic key
+  fetch:
+    src: /root/.ssh/id_rsa.pub
+    dest: tmp/
+    flat: yes
+    when: inventory_hostname in groups['infra']
+
+- name: add root public key to other servers
+  authorized_key:
+    user: root
+    key: "{{ lookup('file', 'tmp/id_rsa.pub') }}"

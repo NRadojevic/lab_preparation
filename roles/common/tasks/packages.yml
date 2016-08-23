@@ -1,0 +1,16 @@
+---
+- name: Install Default Packages For Debian / Ubuntu Systems
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+    - vim
+    - git-core
+    - nmap
+    - tcpdump
+    - tree
+    - jq
+    - htop
+    - iotop
+    - sysstat
+    - iptraf
+    - nethogs
+    - iftop

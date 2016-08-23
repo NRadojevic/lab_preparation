@@ -1,0 +1,16 @@
+---
+- hosts: local
+  user: name=root generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
+
+- name: kein Plan
+  fetch:
+    src: /root/.ssh/id_rsa.pub
+    dest: tmp/
+    flat: yes
+
+- hosts: all
+  
+- name: kein Plan
+  authorized_key:
+    user: root
+    key: "{{ lookup('file', 'tmp/id_rsa.pub') }}"

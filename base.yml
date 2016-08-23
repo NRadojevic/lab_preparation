@@ -1,0 +1,11 @@
+---
+- hosts: all
+  roles:
+    - role: prechecks
+    - role: common
+    - role: ansible-sudo
+    - role: docker
+
+- hosts: infra
+  roles: 
+    - docker-registry

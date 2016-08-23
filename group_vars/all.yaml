@@ -1,0 +1,34 @@
+---
+# file: group_vars/all
+ansible_connection: ssh 
+ansible_ssh_user: vagrant
+#ansible_ssh_pass: vagrant
+
+ssh_allow_root_with_key: true
+ssh_allow_tcp_forwarding: false
+ssh_allow_agent_forwarding: false
+sftp_enabled: true
+
+admin_accounts:
+  nradojevic:
+    state: present
+    append: yes
+    comment: "Nenad Radojevic"
+    groups: admin
+    password: "$6$rounds=656000$3qFBu7rXEjOFSPGA$wrhEU12oq/I0qCmJoJ4y93IMwh.ohMoIt7KCgnoaTp9FV.Di2M/4s8wUIp5DdIH0M1H4oj5OY9hS/Nxusk8EA1" 
+
+ssh_keys:
+  nradojevic:
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGdbp5lbspf30xqFWrcKwHOk7cCF3OAdxyIVybat3MxDMWXHLzwo+BLNgjZ0hPIAIhQJDeww5ktCTylqC0fZ6WRidWIOQQKgmztI4TFbIA3OETt5oBn2SS3nx0Yd/8BmD/4+ER610lVVMXifPmZ4ixforw3LepBEr9Mtrrq/wvtKHmRsrt6Pz11W+eZnDsdQl5meAvT09yTPpjsFWnc1DGm32IN4Te5/oqZF4hnfIMlhqhwiNcblDLIxoLoWA3j7F6YZGtmKpAhPS3sJY3u2JjzHItR0ZL4mEl334iz/MUBi1UCe4C7wcT75iNVgOSJlnK6kcvb+Twzqo6hPXwbsVPi77gOHK9SYtXuUP6r9FgAlJci7Fvdrr0eJvKp1HkXb3+uBZPyQCBlOx+4PljTalpiJvDavsqcnlagrnSUJgvtA3ZIwbgOVyaChybAS6gws1vvTcOaRBZGx+muUBbYg2KjUMbKUbBHNaegtGUJPgXfzLaSEHyMeHAJG58MIG0qqBgcKV91PHZgo5VOWiQJqU/qHQ8UxqsAx4Nc3ZIM6Byzt7+ZQv95uN0dnTQb5X05jfSvcDfL7kIQVxA3CvVd77ct+OnqGdFotN62/LTKtFVXJcIo8FWkQ3jDmKbgtDyYmzG+bR5SO1H0cYYwo4UDgYfrcrCkrG2y/GTb8TyuN0acQ== Nenad@Nenads-MBP.nbg.evoila.de"
+    exclusive: yes
+    key_options: ''
+
+#docker_opts: "--insecure-registry 192.168.0.4:4000"
+
+sudo_defaults:
+  - defaults: env_reset
+  - defaults: secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+sudo_users:
+  - name: "%admin"
+    nopasswd: yes

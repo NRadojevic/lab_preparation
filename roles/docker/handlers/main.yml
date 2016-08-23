@@ -1,0 +1,14 @@
+---
+# handlers file for docker
+- name: Start Docker
+  sudo: yes
+  service: name=docker state=started
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Restart docker
+  service: name=docker state=restarted
+
+- name: Restart dockerio
+  service: name=docker.io state=restarted
