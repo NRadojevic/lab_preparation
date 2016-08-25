@@ -1,8 +1,3 @@
-#- name: Create registry on deploy host
-#  delegate_to: "{{item}}"
-#  with_items: "{{groups['infra']}}"
-#  command: docker run -d -p 4000:5000 --restart=always --name registry registry:2
-
 - name: Generate DOCKER_OPTS in /etc/default/docker
   template: src=docker_opts.j2 dest=/etc/default/docker owner=root group=root mode=0644
   notify:
