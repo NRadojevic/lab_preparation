@@ -1,0 +1,13 @@
+---
+- name: Download weavescope and make it executable
+  get_url:
+    url="https://git.io/scope"
+    dest="/usr/local/bin/scope"
+
+- name: Check if weavescope container is already installed
+  shell: "docker ps | awk '{print $NF}' | grep -w weavescope"
+  register: weave
+
+- name: Scope launch
+  command: scope launch
+  when: weave.stdout != "weavescope"
